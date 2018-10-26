@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS学习笔记-第十三天-07-DOM-更多文档特性</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h3>一些我们应该知道的特性；</h3>
+        <ol>
+            <li>document.documentElement：代表根节点html；</li>
+            <li>document.head：返回文档的< head>节点；</li>
+            <li>document.body：返回文档的< body>节点；</li>
+            <li>document.forms：返回页面中所有表单元素form；</li>
+            <li>document.images：返回页面所有图片元素（即img标签）；</li>
+            <li>document.links：返回文档所有设定了href属性的a及area元素；</li>
+            <li>document.lastModified：文档最后修改时间；</li>
+            <li>document.referrer：链接到当前文档的上一个文档的URL地址；</li>
+            <li>document.title：当前文档的title；</li>
+        </ol>
+    </div>
+    <script>
+        console.log(document.lastModified);
+        console.log(document.referrer);
+    </script>
+</body>
+</html>

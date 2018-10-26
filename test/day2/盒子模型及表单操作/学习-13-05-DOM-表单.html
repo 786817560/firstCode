@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS学习笔记-第十三天-05-DOM-表单</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h3>获取表单和表单元素；</h3>
+        <ol>
+            <li>document.forms：返回页面中所有表单元素；</li>
+            <li>
+                表单和表单元素可以用标准的节点获取方式来获取，不多说了，瞅两个小例子；
+                <pre>
+                    //获取id是myform表单下所有的复选按钮
+                    document.querySelector('#myform input[type="checkbox"]');
+                    //获取id是myform表单下所有的name是newsid的复选按钮
+                    document.querySelector('#myform input[type="checkbox"][name="newsid"]');
+                </pre>
+            </li>
+            <li>表单和表单元素可以用标准的节点获取方式来获取，不多说了；</li>
+        </ol>
+        <h3>表单和元素的属性和方法；</h3>
+        <ol>
+            <li>
+                表单.submit()：表单提交； <br>
+                表单.reset()：表单重置； 
+            </li>
+            <li>
+                元素.type：<code>只读</code>，表单元素类型；
+                <pre>
+                    var type = document.querySelector('#myform input[name="email"]').type;
+                    console.log(type);
+                </pre>
+                元素.form：只读，包含该元素的form表单对象，不存在返回null；
+                <pre>
+                    var form = document.querySelector('#myform input[name="email"]').form;
+                    console.log(form);
+                </pre>
+                元素.name：只读，元素的名称；
+                <pre>
+                    var name = document.querySelector('#myform input[name="email"]').name;
+                    console.log(name);
+                </pre>
+                元素.value：可读可写，简单理解就是输入框的值；
+                <pre>
+                    var email   = document.querySelector('#myform input[name="email"]');
+                    email.value = '1410475107@qq.com';
+                    var value   = email.value;
+                    console.log(value);
+                </pre>
+
+            </li>
+        </ol>
+
+        <h3>表单和元素的事件处理程序；</h3>
+        <ol>
+            <li>
+                表单.onsubmit：监听表单提交，表单提交到服务器前，先执行该事件； <br>
+                如果事件处理程序返回false，则表单提交取消，数据不会提交到服务器处理； <br>
+                需要注意的是，表单.submit()方法不会触发onsubmit事件；
+                <pre>
+                    document.querySelector('#myform').onsubmit = function () {
+                        console.log('表单不提交，我要返回false');
+                        return false;
+                    }
+                </pre>
+                onreset，表单重置事件，处理过程和onsubmit一样，不说了不说了；
+            </li>
+            <li>元素的事件后面的事件处理会讲。。。不讲为什么要提一下。。。好扯；</li>
+        </ol>
+
+        <h3>开关按钮；</h3>
+        <ol>
+            <li>
+                单选按钮和复选框定义了checked属性，可读可写； <br>
+                选中时为true，你也可以把他设置为true表示选中；
+            </li>
+        </ol>
+
+        <!-- 测试用表单 -->
+        <h3>测试用表单。。。</h3>
+        <form id="myform">
+            <div class="form-group">
+                <label for="email">邮箱</label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="邮箱">
+            </div>
+            <div class="form-group">
+                <label for="passwd">密码</label>
+                <input type="password" class="form-control" name="passwd" id="passwd" placeholder="密码">
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="remember"> 记住密码
+                </label>
+            </div>
+            <button type="submit" class="btn btn-default">登录</button>
+        </form>
+    </div>
+
+    <script>
+        var email   = document.querySelector('#myform input[name="email"]');
+        email.value = '1410475107@qq.com';
+        var value   = email.value;
+        console.log(value);
+        document.querySelector('#myform').onsubmit = function () {
+            /* body... */
+            console.log('表单不提交，我要返回false');
+            return false;
+        }
+    </script>
+</body>
+</html>

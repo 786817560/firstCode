@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS学习笔记-第十三天-01-DOM-CSS样式操作</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h3>改变节点的style属性是最直接的方式；</h3>
+        <ol>
+            <li>
+                通过style指定css属性，并改变其值，语法格式是：
+                <pre>
+                    节点.style.css属性 = '值';
+                </pre>
+            </li>
+        </ol>
+        <h3>CSS修改基本规则</h3>
+        <ol>
+            <li>不能访问到用style标签设置的样式；</li>
+            <li>CSS属性名使用小写；</li>
+            <li>CSS属性名如有连字符(-)，则去掉连字符，并将其后的第一个字母大写；</li>
+            <li>CSS属性值<code>必须为字符串</code>，有单位的要带上单位；</li>
+            <li>如果改的属性比较多，推荐使用class进行样式修改；</li>
+        </ol>
+
+        <img src="./img/header.jpg" alt="" class="avator">
+        <button class="btn btn-warning operh">美滋滋的头像</button>
+    </div>
+    <script>
+        document.querySelector('.operh').onclick = function () {
+            var avator = document.querySelector('.avator');
+            avator.style.width          = '80px';
+            avator.style.height         = '80px';
+            avator.style.borderRadius   = '50%';
+            avator.style.border         = '2px solid #f00';
+        }
+    </script>
+</body>
+</html>

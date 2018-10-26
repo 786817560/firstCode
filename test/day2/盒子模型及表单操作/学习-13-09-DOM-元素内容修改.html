@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS学习笔记-第十三天-09-DOM-让元素内容可编辑 </title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .mydiv{
+            border: 1px solid #336699;
+            width: 500px;
+            height: 200px;
+            border-radius: 3px;
+            line-height: 25px;
+            padding: 10px;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>可编辑的元素内容，这是要做编辑器的节奏吗？</h3>
+        <ol>
+            <li>
+                contenteditable：该属性客气元素可编辑功能，属性值设置为false显示关闭可编辑；
+                <pre>
+                    < div class="mydiv" contenteditable>
+                        请编辑这里的内容
+                    < /div>
+                </pre>
+            </li>
+            <li>
+                spellcheck：该属性给元素开启拼写检查，属性值设置为false关闭拼写检查；
+            </li>
+            <li>
+                浏览器定义了多项文本编辑命令，使用document.execCommand()来执行这些命令，但是兼容性堪忧；
+            </li>
+        </ol>
+        <div class="mydiv" contenteditable spellcheck="false">
+            请编辑这里的内容
+        </div>
+        <ul class="tool">
+            <li command='copy'>插入图片</li>
+            <li command='selectAll'>插入图片</li>
+            <li command='insertLineBreak'>插入</li>
+            <li></li>
+        </ul>
+    </div>
+    <script>
+        var myarea = document.querySelector('.mydiv');
+        myarea.onblur = function () {
+            console.log(myarea.innerHTML); //选中信息的开始位置
+        }
+
+        var tool = document.querySelector('.tool').children;
+        for (var i = 0; i < tool.length; i++) {
+            tool[i].onclick = function () {
+                console.log(1);
+                console.log(this.getAttribute('command'));
+                var a = document.execCommand(this.getAttribute('command'), false, null);
+                console.log(a);
+            }
+        }
+        console.log(tool);
+
+
+    </script>
+</body>
+</html>

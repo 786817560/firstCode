@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>滚动</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    .mydiv{
+        height: 2000px;
+    }
+    .search{
+        position: fixed;
+        top: 0;
+        height: 50px;
+        width: 100%;
+        border-bottom: 2px solid #f01;
+        background-color: #fff;
+        display: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="search">搜索部分</div> 
+    <div class="mydiv">区域</div>
+    <script>
+        let search = document.querySelector('.search');
+       window.onscroll = function () {
+           let stop = document.documentElement.scrollTop ||  document.body.scrollTop;
+           console.log(stop);
+           if(stop >= 300){
+                search.style.display = 'block';
+           }else{
+                search.style.display = 'none';
+           }
+       }
+    </script>
+</body>
+
+</html>

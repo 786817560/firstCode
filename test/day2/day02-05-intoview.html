@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>指定区域显示在可视区域</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .menu{
+            position: fixed;
+            top: 0;
+            background-color: #fff;
+        }
+    .mydiv{
+        height: 1200px;
+    }
+    .contact{
+        width: 100%;
+        height: 300px;
+        background-color: #eee;
+        padding-top: 50px;
+    }
+    .info, .hr{
+        width: 100%;
+        height: 500px;
+        background-color: #f08;
+        padding-top: 50px;
+    }
+    .products{
+        width: 100%;
+        height: 800px;
+        background-color: #fd8;
+        padding-top: 50px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="menu">
+        <a href="###" goto="info">公司简介</a>|
+        <a href="###" goto="products">产品信息</a>|
+        <a href="###" goto="contact">联系方式</a>|
+        <a href="###" goto="hr">招聘信息</a>
+    </div>
+    <div class="mydiv">区域</div>
+    <div class="info">
+        公司简介信息
+    </div>
+    <div class="products">产品信息</div>
+    <div class="contact">
+       联系方式的相关信息
+    </div>
+    <div class="hr">
+            招聘信息
+    </div>
+    <div class="mydiv"></div>
+    <script>
+        /*
+       document.querySelector('a').onclick = function () {
+           //把指定的盒子显示在可视区域内
+           document.querySelector('.contact').scrollIntoView();
+           return false;
+       }
+    */
+       //事件代理实现页面跳转
+       document.querySelector('.menu').onclick = function (e) {
+           let node = e.target ;
+           if(node.tagName.toLowerCase() == 'a'){
+               document.querySelector('.' + node.getAttribute('goto')).scrollIntoView();
+           }
+           e.preventDefault();
+           //return false;
+       }
+    </script>
+</body>
+</html>

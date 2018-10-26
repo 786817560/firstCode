@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS学习笔记-第十三天-02-DOM-CSS文件操作</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" id="mycss" href="./css/my.css">
+</head>
+<body>
+    <div class="container">
+        <h3>直接改变引用的CSS文件；</h3>
+        <ol>
+            <li>可以实现页面显示不同的风格</li>
+        </ol>
+
+        <button class="btn btn-warning" id="tpl">
+            切换为蓝色格调
+        </button>   
+    </div>
+    <script>
+        document.querySelector('#tpl').onclick = function () {
+            document.querySelector('#mycss').href = './css/my1.css';
+        }
+    </script>
+</body>
+</html>

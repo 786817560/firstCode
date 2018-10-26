@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS学习笔记-第十三天-08-DOM-获取选中的文本</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h3>你想不想知道用户选中了哪些信息？</h3>
+        <ol>
+            <li>
+                window.getSelection()：返回Selection对象，其中toString()方法返回选中的文本信息；
+                <pre>
+                    document.onmouseup = function () {
+                        var wd = window.getSelection().toString();
+                        if(wd && confirm('要去百度搜索？')){
+                           window.open('https://www.baidu.com/s?wd=' + wd);//打开一个页面 
+                        }
+                    }
+                </pre>
+            </li>
+            <li>
+                window.getSelection().toString()在获取input或textarea里面选中的文本信息上存在兼容问题；
+                可以使用如下方法得到：
+                <pre>
+                    var myarea = document.querySelector('.myarea');
+                    myarea.onmouseup = function () {
+                        console.log(myarea.selectionStart); //选中信息的开始位置
+                        console.log(myarea.selectionEnd);//选中内容的结束位置
+                        var text = myarea.value.substring(myarea.selectionStart, myarea.selectionEnd);//截取选中的内容
+                        console.log(text);
+                    }
+                </pre>
+
+            </li>
+        </ol>
+        <div>
+            选一部分文本信息，看看会发生什么？
+        </div>
+
+        <textarea class="form-control myarea" rows="3">
+            文本框信息，能不能选中那？
+        </textarea>
+
+    </div>
+    <script>
+        var myarea = document.querySelector('.myarea');
+        myarea.onmouseup = function () {
+            console.log(myarea.selectionStart); //选中信息的开始位置
+            console.log(myarea.selectionEnd);//选中内容的结束位置
+            var text = myarea.value.substring(myarea.selectionStart, myarea.selectionEnd);
+            console.log(text);
+        }
+
+    </script>
+</body>
+</html>

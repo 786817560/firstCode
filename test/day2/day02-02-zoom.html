@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>放大镜</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .mydiv{
+            width: 400px;
+            height: 400px;
+            margin: 100px;
+            position: relative;
+        }
+        .thumb {
+            width: 400px;
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+            cursor: move;
+        }
+
+        .thumb .glass {
+            width: 200px;
+            height: 200px;
+            background-image: url(./img/bg.png);
+            background-repeat: repeat;
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            z-index: 2;
+            display: none;
+        }
+
+        .big {
+            width: 400px;
+            height: 400px;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 402px;
+            display: none;
+        }
+        .big img{
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mydiv">
+        <!-- 左边的图 -->
+        <div class="thumb">
+            <img src="./img/thumb.jpg" alt="">
+            <div class="glass"></div>
+        </div>
+        <!-- 右边的大图 -->
+        <div class="big">
+            <img src="./img/big.jpg" alt="">
+        </div>
+    </div>
+    <script>
+        //获取到要操作的节点及想干尺寸信息：隐藏的盒子的尺寸信息获取不到
+        let thumb = document.querySelector('.thumb');
+        let thumbsize = thumb.getBoundingClientRect();
+        let glass = document.querySelector('.glass');
+        let bigimg = document.querySelector('.big img');
+        let glasssize;
+        let big = document.querySelector('.big');
+        //控制放大镜和大图的显示和隐藏
+        thumb.addEventListener('mouseover', showImg);
+        thumb.addEventListener('mouseout', hideImg);
+        function showImg() {
+            glass.style.display = 'block';
+            big.style.display = 'block';
+            //显示以后才能获取到尺寸及位置信息  需要定义成全局变量，下面才可以使用
+            glasssize = glass.getBoundingClientRect();
+        }
+        function hideImg() {
+            glass.style.display = 'none';
+            big.style.display = 'none';
+        }
+        //放大镜跟着鼠标移动
+        thumb.addEventListener('mousemove', glassMove);
+        function glassMove(e) {
+            //改变放大镜的left  和 top 
+            //let left = 鼠标位置 - thumb的left值-放大镜宽度的一半; 
+            let left = (e.pageX || e.clientX) - thumbsize.left - glasssize.width/2;
+            //矫正left值：不能小于0  
+            if(left < 0){
+                left = 0;
+            }
+            //不能大于 thumb宽度 - glass宽度
+            if(left > thumbsize.width - glasssize.width){
+                left = thumbsize.width - glasssize.width;
+            }
+            //改变放大镜的left值
+            glass.style.left = left + 'px';
+
+            //top和left原理完全一致
+            let top = (e.pageY || e.clientY) - thumbsize.top - glasssize.height/2;
+            if(top < 0){
+                top = 0;
+            }
+            if(top >  thumbsize.height - glasssize.height){
+                top = thumbsize.height - glasssize.height;
+            }
+            glass.style.top = top + 'px';
+
+            //移动大图 
+            //往做移动的距离
+            let bigleft = -left * (thumbsize.width / glasssize.width);
+            bigimg.style.left = bigleft + 'px';
+
+            let bigtop = -top * (thumbsize.height / glasssize.height);
+            bigimg.style.top = bigtop + 'px';
+        }
+    </script>
+</body>
+
+</html>

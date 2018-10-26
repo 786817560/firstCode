@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>放大镜</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        *{margin:0; padding: 0;}
+        .img{
+            width: 400px;
+            height: 400px;
+            position: relative;
+            cursor:move;
+        }
+        .img .thumb{
+            width: 400px;
+            height: 400px;
+            position: relative;
+        }
+        .img .glass{
+            width: 200px;
+            height: 200px;
+            z-index: 2;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-image: url(./img/bg.png);
+            background-repeat: repeat;
+            display: none;
+        }
+        .img .big{
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            left:402px;
+            top:0;
+            overflow: hidden;
+            display: none;
+        }
+        .img .big img{
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>  
+    <div class="container">
+        <h3>放大镜。。。</h3>
+        <div class="img">
+            <!-- 缩略图及放大镜盒子 -->
+            <div class="thumb">
+                <img src="./img/thumb.jpg" alt="">
+                <div class="glass"></div>
+            </div>
+            <!-- 大图盒子 -->
+            <div class="big">
+                <img src="./img/big.jpg" alt="">
+            </div>
+        </div>
+    </div>
+    <script>
+        var thumbp  = document.getElementsByClassName('thumb')[0];
+        var img     = document.getElementsByClassName('img')[0];
+        var glass   = thumbp.children[1];
+        //要操作的图片：注意这里是操作图片，而不是操作装图片的盒子
+        var bigimg  = img.children[1].getElementsByTagName('img')[0];
+        //鼠标移入显示放大镜，移出隐藏放大镜，大图也一样
+        thumbp.addEventListener('mouseover',    showglass);
+        thumbp.addEventListener('mouseout',     hideglass);
+        function showglass () {
+            glass.style.display     = 'block';
+            bigimg.parentNode.style.display    = 'block';
+        }
+        function hideglass () {
+            glass.style.display     = 'none';
+            bigimg.parentNode.style.display    = 'none';
+        }
+        //鼠标移动，放大镜这个移动
+        thumbp.addEventListener('mousemove', moveglass);
+        function moveglass () {
+            var thumb_size  = thumbp.getBoundingClientRect();
+            var glass_size  = glass .getBoundingClientRect();
+            var img_size    = img   .getBoundingClientRect();
+            //放大镜左偏移量=鼠标的X位置-.img盒子的左偏移量-放大镜宽度的一半；
+            var left = event.pageX - img_size.left - glass_size.width/2;
+            if(left < 0){
+                left = 0;
+            }else if(left > thumb_size.width - glass_size.width){
+                left = thumb_size.width - glass_size.width;
+            }
+            glass.style.left = left + 'px';
+            //处理大图
+            var bigleft = - (thumb_size.width/glass_size.width)*left;
+            bigimg.style.left = bigleft + 'px';
+
+            //上下偏移量
+            var top = event.pageY - img_size.top - glass_size.height/2;
+            if(top < 0){
+                top = 0;
+            }else if(top > thumb_size.height - glass_size.height){
+                top = thumb_size.height - glass_size.height;
+            }
+            glass.style.top = top + 'px';
+             //处理大图
+            var bigtop = - (thumb_size.height/glass_size.height)*top;
+            bigimg.style.top = bigtop + 'px';
+            
+            console.log(event.pageX);
+            console.log(event.pageY);
+        }
+
+    </script>
+</body>
+</html>

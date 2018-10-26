@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>修改盒子里面的内容</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <form action="" id="regform" method="POST">
+        账号:
+        <input type="text" class="form-control" value="刘桐" name="username" id="username">
+        <hr> 密码:
+        <input type="password" class="form-control" name="passwd" id="passwd">
+        <hr> 性别:
+        <input type="radio" name="gender" value="1"> 男
+        <input type="radio" name="gender" value="2"> 女
+        <input type="radio" name="gender" value="0" checked> 保密
+        <hr> 爱好：
+        <input type="checkbox" name="hobby" value="1">读书
+        <input type="checkbox" name="hobby" value="2">运动
+        <input type="checkbox" name="hobby" value="3">写代码
+        <input type="checkbox" name="hobby" value="4">加班
+        <hr> 来自：
+        <select name="province" id="province">
+            <option value="">=省份=</option>
+        </select>
+        <select name="city" id="city">
+            <option value="">=市=</option>
+        </select>
+        <hr> 简介：
+        <textarea name="info" id="info" cols="30" rows="3"></textarea>
+        <hr>
+        <!-- <input type="submit" value="提交">  可以触发onsubmit事件-->
+        <input type="button" class="ressubmit" value="提交">
+        <input type="button" class="reset" value="重置">
+    </form>
+    <script>
+        let regform = document.querySelector('#regform');
+
+        document.querySelector('.ressubmit').onclick = function () {
+            //各种验证
+            regform.submit();
+        }
+
+        document.querySelector('.reset').onclick = function () {
+            regform.reset();
+        }
+        //表单的提交事件 和 重置事件
+        regform.onsubmit = function () {
+            alert('表单提交了');
+            return false;
+        }
+        regform.onreset = function () {
+            if (!confirm('是否确定重置？数据将丢失')) {
+                return false;
+            }
+        }
+
+        //输入框事件
+        //获取焦点事件  
+        let username  =document.querySelector('#username');
+        username.onfocus = function () {
+            let div = document.createElement('div');
+            div.innerHTML = '请输入2-12位账号信息';
+            this.parentNode.insertBefore(div, this.nextElementSibling);
+        }
+        username.onblur = function () {
+            this.nextElementSibling.remove();
+        }
+
+        //onkeydown  onkeyup
+
+    </script>
+</body>
+
+</html>

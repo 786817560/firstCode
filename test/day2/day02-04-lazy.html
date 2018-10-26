@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>懒加载</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    .mydiv{
+        height: 800px;
+    }
+    .search{
+        position: fixed;
+        top: 0;
+        height: 50px;
+        width: 100%;
+        border-bottom: 2px solid #f01;
+        background-color: #fff;
+        display: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="mydiv">区域</div>
+
+    <div class="imglist">
+        <ul>
+            <Li><img src="./img/header.jpg" data-src="./img/topimg1.jpg"></Li>
+            <Li><img src="./img/header.jpg" data-src="./img/topimg2.jpg"></Li>
+            <Li><img src="./img/header.jpg" data-src="./img/topimg3.jpg"></Li>
+            <Li><img src="./img/header.jpg" data-src="./img/topimg4.jpg"></Li>
+            <Li><img src="./img/header.jpg" data-src="./img/topimg5.jpg"></Li>
+            <Li><img src="./img/header.jpg" data-src="./img/topimg1.jpg"></Li>
+            <Li><img src="./img/header.jpg" data-src="./img/topimg2.jpg"></Li>
+            <Li><img src="./img/header.jpg" data-src="./img/topimg3.jpg"></Li>
+            <Li><img src="./img/header.jpg" data-src="./img/topimg4.jpg"></Li>
+            <Li><img src="./img/header.jpg" data-src="./img/topimg5.jpg"></Li>
+            <Li><img src="./img/header.jpg" data-src="./img/topimg1.jpg"></Li>
+            <Li><img src="./img/header.jpg" data-src="./img/topimg2.jpg"></Li>
+            <Li><img src="./img/header.jpg" data-src="./img/topimg3.jpg"></Li>
+            <Li><img src="./img/header.jpg" data-src="./img/topimg4.jpg"></Li>
+            <Li><img src="./img/header.jpg" data-src="./img/topimg5.jpg"></Li>
+            <Li><img src="./img/header.jpg" data-src="./img/topimg1.jpg"></Li>
+            <Li><img src="./img/header.jpg" data-src="./img/topimg2.jpg"></Li>
+            <Li><img src="./img/header.jpg" data-src="./img/topimg3.jpg"></Li>
+            <Li><img src="./img/header.jpg" data-src="./img/topimg4.jpg"></Li>
+            <Li><img src="./img/header.jpg" data-src="./img/topimg5.jpg"></Li>
+
+            
+        </ul>
+
+    </div>
+    <script>
+       let imglist = document.querySelector('.imglist');
+       let allimg = imglist.querySelectorAll('img');
+        //标记图片手已经加载过
+       let reloaded = true;
+       window.onscroll = function () {
+           let scrolltop = document.documentElement.scrollTop;
+           let winheight = window.innerHeight;
+           let imgtop = imglist.getBoundingClientRect().top;
+           console.log(winheight, imgtop);
+           //提前加载图片，提升用户体验
+           if(winheight + 100 >= imgtop && reloaded){
+                reloaded = false;
+               for (const img of allimg) {
+                   console.log(img);
+                   img.src = img.dataset.src;
+               }
+           }
+       }
+    </script>
+</body>
+</html>

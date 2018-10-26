@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS学习笔记-第十三天-06-DOM-select相关的OPTION</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h3>select一些常用操作；</h3>
+        <ol>
+            <li>
+                节点.options：返回select所有option选项，类数组的HTMLOptionsCollection；
+                <pre>
+                    var select = document.querySelector('#myform select');
+                    var allopt = select.options;
+                    console.log(allopt);
+                </pre>
+            </li>
+            <li>
+                节点.selectedIndex：可读可写，被选中的选项索引，下边从0开始；
+                <pre>
+                    var select = document.querySelector('#myform select');
+                    var allopt = select.options;
+                    console.log(allopt);
+                    select.onchange = function () {
+                        var sid = this.selectedIndex;
+                        console.log(sid);
+                    }
+                </pre>
+                通过修改selectedIndex的值设置默认选中选项；
+                <pre>
+                    var select = document.querySelector('#myform select');
+                    var allopt = select.options;
+                    select.selectedIndex = 2; //第三个option被选中
+                </pre>
+
+            </li>
+            <li>
+                select节点.value：得到选中的option值； <br>
+                option节点.text：得到选项的文本信息，也就是用户看到的选项文字；<br>
+                option节点.value：得到的是选项的值，和SELECT选中的值有区别；
+                <pre>
+                    var select = document.querySelector('#myform select');
+                    select.onchange = function () {
+                        var sid = this.selectedIndex;
+                        console.log(this.value); //select选中选项的值
+                        console.log(this[sid].text);//选项的文本信息
+                        console.log(this[2].value);//指定选项的值
+                    }
+                </pre>
+            </li>
+            <li>
+                一样可以通过节点操作对select的option进行增删查改操作；
+                <pre>
+                    var select      = document.querySelector('#myform select');
+                    var allopt      = select.options;
+                    var newopt      = document.createElement('option');
+                    newopt.value    = allopt.length + 1;
+                    newopt.text     = '新加选项';
+                    //方式一
+                    allopt[allopt.length] = newopt; //直接添加到选项里面
+                    //方式二，一般选中这种方式
+                    select.appendChild(newopt);
+                </pre>
+            </li>
+        </ol>
+        <!-- 测试用表单 -->
+        <h3>测试用表单。。。</h3>
+        <form id="myform">
+            <select class="form-control">
+                <option value="1">选项1</option>
+                <option value="2">选项2</option>
+                <option value="3">选项3</option>
+                <option value="4">选项4</option>
+                <option value="5">选项5</option>
+            </select>
+        </form>
+        <p></p>
+    </div>
+    <a href="http://localhost/js6/day13/referrer.html">测试referrer</a>
+    <script>
+        var select = document.querySelector('#myform select');
+        var allopt = select.options;
+        var newopt = document.createElement('option');
+        newopt.value = allopt.length + 1;
+        newopt.text = '新加选项';
+        allopt[allopt.length] = newopt; //直接添加到选项里面
+        select.appendChild(newopt);
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS学习笔记-第十三天-03-DOM-几何形状</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .mydiv{
+            width: 200px;
+            height: 100px;
+            margin: 50px;
+            border:1px solid #f00;
+            padding: 3px;
+        }
+        .noview{
+            margin-top: 2000px;
+            border: 2px solid #F00;
+            width: 500px;
+            height: 200px;
+        }
+        .height{
+            height: 1000px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>查询元素的几何尺寸；</h3>
+        <ol>
+            <li>
+                <code>节点.getBoundingClientRect()</code>：得到一个元素的尺寸和坐标位置； <br>
+                left和top对应的是左上角x,y坐标； <br>
+                right和bottom对应的是右下角x,y坐标；
+                <pre>
+                   //html代码
+                    < div class="mydiv">
+                        这是我的盒子
+                    < /div>
+                    //JS代码
+                    var mydiv = document.querySelector('.mydiv');
+                    var clent = mydiv.getBoundingClientRect();
+                    console.log(clent);
+                </pre>
+                <code>NOTE:</code>
+                <pre>
+                    //其中的width和height代表的是元素的宽度和高度
+                    clent.width     = clent.right - clent.left;
+                    clent.height    = clent.bottom - clent.top;
+                </pre>
+                所以，浏览器返回的ClientRect里面<code>如果没有</code>width和height，
+                可以通过上面的公式计算出来；
+            </li>
+            <li>
+                节点.scrollIntoView()：让元素在视口中可见，默认将元素和视口的上边缘对齐;
+                如果传递参数false，则将元素的下边缘和视口的下边缘对齐；
+                <pre>
+                    //html代码：要控制的div
+                    < div class="noview">开始你是看不到我的，我在下面隐藏着了< /div>
+                    < div class="height">测试用< /div>
+                    //HTML代码，绑定事件的按钮
+                    < button class="btn btn-warning show">让我看到他< /button>
+                    //JS代码
+                    document.querySelector('.show').onclick = function () {
+                        document.querySelector('.noview').scrollIntoView(false);
+                    }
+                </pre>
+                <button class="btn btn-warning show">让我看到他</button>
+            </li>
+        </ol>
+
+           
+    </div>
+    <div class="mydiv">这是我的盒子</div>
+    <div class="noview">开始你是看不到我的，我在下面隐藏着了</div>
+    <div class="height">测试用</div>
+    <script>
+        var mydiv = document.querySelector('.mydiv');
+        var clent = mydiv.getBoundingClientRect();
+        console.log(clent);
+        document.querySelector('.show').onclick = function () {
+            document.querySelector('.noview').scrollIntoView(false);
+        }
+    </script>
+</body>
+</html>

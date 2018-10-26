@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>盒子尺寸信息获取</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .mydiv{
+            width: 200px;
+            height: 200px;
+            background-color: #f01;
+            margin: 50px;
+        }
+    </style>
+</head>
+<body>
+   <div class="mydiv">
+    我的div
+   </div>
+    <script>
+        document.querySelector('.mydiv').onclick = function () {
+            this.style.width = '300px';
+            // this.style.display = 'none';
+            //点击的时候获取盒子的尺寸相关信息 及 坐标位置信息
+            let size = this.getBoundingClientRect();
+            console.log(size);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS学习笔记-第十三天-04-DOM-盒子模型</title>
+    <style type="text/css">
+        *{margin: 0;padding: 0;}
+        #mydiv{
+            width: 103px;
+            height: 104px;
+            border: 3px solid #00FF00;
+            padding:4px 5px;
+            margin: 4px;
+            overflow: scroll;
+        }
+
+        #mf{
+            margin: 50px;
+            /*position: absolute;*/
+            width: 200px;
+            height: 200px;
+            background-color: #cc88aa;
+            padding: 0;
+        }
+        .result{
+            margin-left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="mf">
+        <div id="mydiv">
+<pre>
+width: 103px;
+height: 104px;
+border: 3px solid #00FF00;
+padding:4px 5px;
+margin: 4px;
+</pre>
+<p>1</p><p>2</p><p>3</p><p>4</p>
+        </div>
+    </div>
+    <div class="result">
+        <script>
+            /*
+                offset  client scroll
+                Width  Height Left Top
+            */
+            var mydiv = document.querySelector('#mydiv');
+            document.write('<b>offsetWidth</b>：本身宽度[103]+边框线[3+3]+左右内边距[5+5]=' + mydiv.offsetWidth);
+            document.write('；<br />');
+            document.write('<b>offsetHeight</b>：本身高度[104]+边框线[3+3]+上下内边距[4+4]=' + mydiv.offsetHeight);
+            document.write('；<br />');
+            document.write('<b>offsetTop</b>：相对有定位属性的父节点上偏移量=' + mydiv.offsetTop);
+            document.write('；<br />');
+            document.write('<b>offsetLeft</b>：相对有定位属性的父节点左偏移量=' + mydiv.offsetLeft);
+            document.write('；<br />');
+            document.write('<b>clientWidth</b>：本身的宽度[103]+左右内边距[5+5]=' + mydiv.clientWidth);
+            document.write('<br />');
+            document.write('<b>clientHeight</b>：本身的高度[104]+上下内边距[4+4]=' + mydiv.clientHeight);
+            document.write('；<br />');
+            document.write('<b>clientTop</b>：上边框线的宽度=' + mydiv.clientTop);
+            document.write('；<br />');
+            document.write('<b>clientLeft</b>：左边框线的宽度=' + mydiv.clientLeft);
+
+            document.write('；<br />');
+            document.write('<b>scrollWidth</b>：盒子的实际宽度(包括不可见部分，不包括边线) =' + mydiv.scrollWidth);
+            document.write('；<br />');
+            document.write('<b>scrollHeight</b>：盒子的实际高度(包括不可见部分，不包括边线)=' + mydiv.scrollHeight);
+            document.write('；<br />');
+
+            //滚动距离可修改
+            mydiv.scrollTop = 50;
+            mydiv.scrollLeft = 30;
+            document.write('<b>scrollTop</b>：滚动条向下滚动的距离=' + mydiv.scrollTop);
+            document.write('；<br />');
+            document.write('<b>scrollLeft</b>：滚动条向右滚动的距离=' + mydiv.scrollLeft);
+            document.write('；<br/>');
+            //窗口可见区域的宽度和高度
+            document.write('<b>window.innerHeight</b>：浏览器窗口可见区域高度=' + window.innerHeight);
+            document.write('；<br/>');
+            document.write('<b>window.innerWidth</b>：浏览器窗口可见区域宽度=' + window.innerWidth);
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>获取选中的文字信息</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    
+</head>
+
+<body>
+   <div class="mydiv">
+       我的文字信息
+   </div>
+    <script>
+        // getSelection:可以获取选中的文字信息
+        window.onmouseup = function(){
+            let gs = window.getSelection().toString();
+            console.log(gs);
+            if(gs && confirm('确定去百度搜索吗？')){
+                //跳转到百度
+                // window.location.href = 'https://www.baidu.com/s?wd='+gs;
+                //打开新的窗口
+                window.open('https://www.baidu.com/s?wd='+gs);
+            }
+        }
+    </script>
+</body>
+</html>
